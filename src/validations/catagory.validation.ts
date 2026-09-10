@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
-export const createCategorySchema = z.object({
+export const createCatagorySchema = z.object({
   body: z.object({
     name: z
       .string({
-        error: 'Category name is required',
+        error: 'Catagory name is required',
       })
       .trim()
       .min(2, 'Name must be at least 2 characters long')
@@ -17,10 +17,10 @@ export const createCategorySchema = z.object({
   }),
 });
 
-export const updateCategorySchema = z.object({
+export const updateCatagorySchema = z.object({
   params: z.object({
     id: z
-      .string({ error: 'Category ID is required' })
+      .string({ error: 'Catagory ID is required' })
       .regex(/^\d+$/, 'ID must be a positive integer'),
   }),
   body: z
@@ -42,10 +42,10 @@ export const updateCategorySchema = z.object({
     }),
 });
 
-export const categoryIdParamSchema = z.object({
+export const catagoryIdParamSchema = z.object({
   params: z.object({
     id: z
-      .string({ error: 'Category ID is required' })
+      .string({ error: 'Catagory ID is required' })
       .regex(/^\d+$/, 'ID must be a positive integer'),
   }),
 });

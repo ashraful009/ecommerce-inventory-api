@@ -1,12 +1,12 @@
 import { pool } from "../config/db.js";
 import {
-  ICategory,
-  ICreateCategoryPayload,
-  IUpdateCategoryPayload,
-} from "../types/category.types.js";
+  ICatagory,
+  ICreateCatagoryPayload,
+  IUpdateCatagoryPayload,
+} from "../types/catagory.types.js";
 
-export class CategoryRepository {
-  async create(payload: ICreateCategoryPayload): Promise<ICategory> {
+export class CatagoryRepository {
+  async create(payload: ICreateCatagoryPayload): Promise<ICatagory> {
     const query = `
     INSERT INTO catagories 
     (name, description) 
@@ -14,43 +14,43 @@ export class CategoryRepository {
     RETURNING id, name, description, created_at;`;
 
     const values = [payload.name, payload.description || null];
-    const { rows } = await pool.query<ICategory>(query, values);
+    const { rows } = await pool.query<ICatagory>(query, values);
     return rows[0];
   }
 
-  async findAll(): Promise<ICategory[]> {
+  async findAll(): Promise<ICatagory[]> {
     const query = `
       SELECT 
       id, name, description, created_at
       FROM catagories
       ORDER BY id ASC;
     `;
-    const { rows } = await pool.query<ICategory>(query);
+    const { rows } = await pool.query<ICatagory>(query);
     return rows;
   }
 
-  async findById(id: number): Promise<ICategory | null> {
+  async findById(id: number): Promise<ICatagory | null> {
     const query = `
     SELECT 
     id, name, description, created_at 
     FROM catagories 
     WHERE id = $1;`;
-    const { rows } = await pool.query<ICategory>(query, [id]);
+    const { rows } = await pool.query<ICatagory>(query, [id]);
     return rows[0] || null;
   }
 
-  async findByName(name: string): Promise<ICategory | null> {
+  async findByName(name: string): Promise<ICatagory | null> {
     const query = `
     SELECT 
     id, name, description, created_at
     FROM catagories
     WHERE LOWER(name) = LOWER($1);`;
 
-    const {rows} = await pool.query<ICategory> (query, [name]);
+    const {rows} = await pool.query<ICatagory> (query, [name]);
     return rows[0] || null;
   }
 
-  async update(id: number, payload: IUpdateCategoryPayload): Promise<ICategory | null> {
+  async update(id: number, payload: IUpdateCatagoryPayload): Promise<ICatagory | null> {
     const fields: string[] = [];
     const values: unknown[] = [];
     let counter = 1;
@@ -75,11 +75,11 @@ export class CategoryRepository {
       RETURNING id, name, description, created_at;
     `;
 
-    const { rows } = await pool.query<ICategory>(query, values);
+    const { rows } = await pool.query<ICatagory>(query, values);
     return rows[0] || null;
   }
 
-  // Delete category by ID
+  // Delete catagory by ID
   async delete(id: number): Promise<boolean> {
     const query = `
       DELETE FROM catagories

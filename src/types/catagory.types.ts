@@ -1,16 +1,16 @@
-export interface ICategory {
+export interface ICatagory {
   id: number;
   name: string;
   description: string | null;
   created_at: Date;
 }
 
-export interface ICreateCategoryPayload {
+export interface ICreateCatagoryPayload {
   name: string;
   description?: string;
 }
 
-export interface IUpdateCategoryPayload {
+export interface IUpdateCatagoryPayload {
   name?: string;
   description?: string;
 }
