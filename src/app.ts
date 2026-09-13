@@ -5,7 +5,7 @@ import { AppError } from './utils/appError.js';
 import { catagoryRoutes } from './routes/catagory.routes.js';
 import { productRoutes } from './routes/product.routes.js';
 import { userRoutes } from './routes/user.routes.js';
-
+import { orderRoutes } from './routes/order.routes.js';
 const app: Application = express();
 
 // Global Middlewares
@@ -25,6 +25,7 @@ app.get('/health', (req: Request, res: Response) => {
 app.use('/api/v1/categories', catagoryRoutes);
 app.use('/api/v1/products', productRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/orders', orderRoutes);
 
 // Handle 404 Routes
 app.all('*splat', (req: Request, res: Response, next) => {
