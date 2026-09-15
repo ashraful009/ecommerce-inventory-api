@@ -22,7 +22,7 @@ export class UserService {
     }
     return await this.userRepository.create(payload);
   }
-async getAllUsers(): Promise<IUser[]> {
+  async getAllUsers(): Promise<IUser[]> {
     return await this.userRepository.findAll();
   }
   async getUserById(id: number): Promise<IUser> {
